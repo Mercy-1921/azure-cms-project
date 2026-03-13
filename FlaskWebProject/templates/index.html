@@ -14,16 +14,29 @@
                 </tr>
             </thead>
             <tbody>
+                <tbody>
+{% for post in posts %}
+<tr>
+    <th scope="row">{{ post.id }}</th>
+    <td>{{ post.title }}</td>
+    <td>{{ post.author }}</td>
+
+    <td>
+        {% if post.image_path %}
+            <img src="{{ imageSource }}{{ post.image_path }}" width="150">
+        {% else %}
+            No Image
+        {% endif %}
+    </td>
+
+    <td>
+        <a href="{{ url_for('post', id=post.id) }}">Edit Post</a>
+    </td>
+</tr>
+{% endfor %}
+</tbody>
             </tbody>
-            {% for post in posts %}
-            <tr>
-                <th scope="row">{{ post.id }} </th>
-                <td>{{ post.title }}</td>
-                <td>{{ post.author }}</td>
-                <td>{{ post.image_path != None }}</td>
-                <td><a href="{{ url_for('post', id=post.id) }}">Edit Post</a></td>
-            </tr>
-            {% endfor %}
+            
         </table>
     </div>
     <div class="row">
